@@ -11,7 +11,7 @@ use crate::{
         ticker::{SubscribeStatistics, SubscribeTickers, Ticker, TickerStream},
         StatisticStream, SubscribeBidAsk, SubscribeTrades,
     },
-    ExcService, ExchangeError, SubscribeTradesService,
+    ExcService, ExchangeError,
 };
 
 use super::book::SubscribeBidAskService;
@@ -109,13 +109,16 @@ where
     }
 
     fn call(&mut self, req: SubscribeTickers) -> Self::Future {
+        let trade = Service::<SubscribeTrades>::call(
+            &mut self.svc,
+            SubscribeTrades {
+                instrument: req.instrument.clone(),
+            },
+        );
         let mut svc = self.svc.clone();
         let ignore_bid_ask_ts = self.ignore_bid_ask_ts;
         async move {
-            let trades = svc
-                .subscribe_trades(&req.instrument)
-                .await?
-                .map_ok(Either::Left);
+            let trades = trade.await?.map_ok(Either::Left);
             let bid_asks = svc
                 .subscribe_bid_ask(&req.instrument)
                 .await?
