@@ -1,4 +1,3 @@
-
 /// Endpoint.
 #[derive(Debug, Default)]
 pub struct Endpoint {}

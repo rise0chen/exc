@@ -41,7 +41,6 @@ pub mod prelude {
         trading::{CheckOrderService, SubscribeOrdersService, TradingService},
         ExcExt,
     };
-
 }
 
 /// The result type of `exc`.
