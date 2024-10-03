@@ -68,6 +68,7 @@ optional = true
 
 [dependencies.hyper-util]
 workspace = true
+features = ["http1", "client-legacy"]
 optional = true
 
 [dependencies.hyper-tls]
