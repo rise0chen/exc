@@ -19,7 +19,7 @@ pub enum ExchangeError {
     #[cfg(feature = "http")]
     /// Http errors.
     #[error("http: {0}")]
-    Http(hyper::Error),
+    Http(hyper_util::client::legacy::Error),
     /// All other errors.
     #[error(transparent)]
     Other(#[from] anyhow::Error),

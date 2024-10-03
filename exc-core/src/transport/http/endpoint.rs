@@ -1,18 +1,15 @@
-use hyper::client::Builder;
+#[cfg(not(feature = "http2"))]
+use hyper::client::conn::http1::Builder;
+#[cfg(feature = "http2")]
+use hyper::client::conn::http2::Builder;
 
 /// Endpoint.
 #[derive(Debug, Default)]
-pub struct Endpoint {
-    #[cfg_attr(
-        not(any(feature = "native-tls", feature = "rustls-tls")),
-        allow(dead_code)
-    )]
-    inner: Builder,
-}
+pub struct Endpoint {}
 
 impl From<Builder> for Endpoint {
-    fn from(inner: Builder) -> Self {
-        Self { inner }
+    fn from(_inner: Builder) -> Self {
+        Self {}
     }
 }
 
@@ -20,6 +17,8 @@ impl From<Builder> for Endpoint {
 mod https {
     use super::*;
     use crate::transport::http::channel::HttpsChannel;
+    use hyper_util::client::legacy::Client;
+    use hyper_util::rt::TokioExecutor;
 
     impl Endpoint {
         /// Create a https channel.
@@ -36,7 +35,8 @@ mod https {
                     let https= https.build();
                 }
             }
-            let client = self.inner.build(https);
+
+            let client = Client::builder(TokioExecutor::new()).build(https);
             HttpsChannel { inner: client }
         }
     }

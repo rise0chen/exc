@@ -1,5 +1,5 @@
 #[cfg(any(feature = "native-tls", feature = "rustls-tls"))]
-pub use https::HttpsChannel;
+pub use https::{Body, Bytes, HttpsChannel, Incoming};
 
 #[cfg(any(feature = "native-tls", feature = "rustls-tls"))]
 /// Https channel.
@@ -7,7 +7,11 @@ pub mod https {
     use crate::ExchangeError;
     use futures::{future::BoxFuture, FutureExt, TryFutureExt};
     use http::{Request, Response};
-    use hyper::{client::HttpConnector, Body, Client};
+    pub use hyper::body::{Bytes, Incoming};
+    use hyper_util::client::legacy::{connect::HttpConnector, Client};
+
+    /// Body
+    pub type Body = http_body_util::Full<Bytes>;
 
     cfg_if::cfg_if! {
         if #[cfg(feature = "native-tls")] {
@@ -20,11 +24,11 @@ pub mod https {
     /// Https channel.
     #[derive(Clone)]
     pub struct HttpsChannel {
-        pub(crate) inner: Client<HttpsConnector<HttpConnector>>,
+        pub(crate) inner: Client<HttpsConnector<HttpConnector>, Body>,
     }
 
     impl tower::Service<Request<Body>> for HttpsChannel {
-        type Response = Response<Body>;
+        type Response = Response<Incoming>;
         type Error = ExchangeError;
         type Future = BoxFuture<'static, Result<Self::Response, Self::Error>>;
 

@@ -16,8 +16,8 @@ native-tls = ["tokio-tungstenite?/native-tls", "hyper-tls"]
 rustls-tls = ["tokio-tungstenite?/rustls-tls-webpki-roots", "hyper-rustls"]
 websocket = ["tokio-tungstenite", "dep:http", "tokio/net"]
 driven = ["tokio/sync", "tokio/rt"]
-http = ["hyper/client", "hyper/http1", "dep:http", "exc-service/http"]
-http2 = ["http", "hyper/http2", "hyper-rustls?/http2"]
+http = ["hyper/client", "hyper/http1", "hyper-util", "dep:http", "http-body-util", "exc-service/http"]
+http2 = ["http", "hyper/http2", "hyper-tls?/alpn", "hyper-rustls?/http2"]
 retry = ["exc-service/retry"]
 limit = ["exc-service/limit"]
 poll = ["tokio/time"]
@@ -54,6 +54,10 @@ optional = true
 workspace = true
 optional = true
 
+[dependencies.http-body-util]
+workspace = true
+optional = true
+
 [dependencies.tokio]
 workspace = true
 optional = true
@@ -62,14 +66,18 @@ optional = true
 workspace = true
 optional = true
 
+[dependencies.hyper-util]
+workspace = true
+optional = true
+
 [dependencies.hyper-tls]
-version = "0.5.0"
+version = "0.6.0"
 optional = true
 
 [dependencies.hyper-rustls]
-version = "0.24.2"
+version = "0.27.3"
 default-features = false
-features = ["webpki-tokio", "http1"]
+features = ["webpki-tokio", "ring", "http1"]
 optional = true
 
 # dev

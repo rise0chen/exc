@@ -42,11 +42,6 @@ pub mod prelude {
         ExcExt,
     };
 
-    #[cfg(feature = "okx")]
-    pub use crate::Okx;
-
-    #[cfg(feature = "binance")]
-    pub use crate::Binance;
 }
 
 /// The result type of `exc`.
@@ -54,21 +49,3 @@ pub type Result<T> = std::result::Result<T, ExchangeError>;
 
 #[cfg(feature = "retry")]
 pub use crate::core::retry;
-
-#[cfg(feature = "okx")]
-/// Okx exchange service.
-pub mod okx {
-    pub use exc_okx::*;
-}
-
-#[cfg(feature = "binance")]
-/// Binance exchange service.
-pub mod binance {
-    pub use exc_binance::*;
-}
-
-#[cfg(feature = "okx")]
-pub use crate::okx::Okx;
-
-#[cfg(feature = "binance")]
-pub use crate::binance::Binance;

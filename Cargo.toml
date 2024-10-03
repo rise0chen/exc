@@ -6,9 +6,6 @@ members = [
     "exc-types",
     "exc-service",
     "exc-symbol",
-    "exc-okx",
-    "exc-binance",
-    "examples",
 ]
 resolver = "2"
 
@@ -29,8 +26,6 @@ exc-service = { version = "0.7.3", path = "./exc-service", default-features = fa
 exc-types = { version = "0.7.3", path = "./exc-types", default-features = false }
 exc-make = { version = "0.7.3", path = "./exc-make", default-features = false }
 exc-core = { version = "0.7.3", path = "./exc-core", default-features = false }
-exc-binance = { version = "0.7.3", path = "./exc-binance", default-features = false }
-exc-okx = { version = "0.7.3", path = "./exc-okx", default-features = false }
 exc = { path = "./exc", default-features = false }
 
 indicator = "0.4.0"
@@ -55,7 +50,7 @@ rust_decimal_macros = "1.27.0"
 num-traits = "0.2.15"
 
 # async
-tower = { version = "0.4.13", default-features = false }
+tower = { version = "0.4", default-features = false }
 tower-make = "0.3.0"
 tower-service = "0.3.2"
 futures = "0.3.25"
@@ -64,10 +59,12 @@ pin-project-lite = "0.2.9"
 async-stream = "0.3.3"
 tokio = "1.23.0"
 tokio-stream = "0.1.11"
-tokio-tungstenite = "0.20.1"
+tokio-tungstenite = "0.24"
 tokio-tower = "0.6.0"
-hyper = "0.14.23"
-http = "0.2.8"
+hyper = "1.4"
+hyper-util = "0.1"
+http = "1.1"
+http-body-util = "0.1"
 
 # utils
 humantime = "2.1.0"

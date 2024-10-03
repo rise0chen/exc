@@ -35,11 +35,4 @@ mod tests {
     {
         Box::new(svc)
     }
-
-    #[cfg(feature = "binance")]
-    #[tokio::test]
-    async fn test_box_bid_ask() {
-        let binance = crate::Binance::usd_margin_futures().connect_exc();
-        std::hint::black_box(boxed_bid_ask(binance));
-    }
 }
