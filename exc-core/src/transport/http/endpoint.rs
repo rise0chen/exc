@@ -1,17 +1,7 @@
-#[cfg(not(feature = "http2"))]
-use hyper::client::conn::http1::Builder;
-#[cfg(feature = "http2")]
-use hyper::client::conn::http2::Builder;
 
 /// Endpoint.
 #[derive(Debug, Default)]
 pub struct Endpoint {}
-
-impl From<Builder> for Endpoint {
-    fn from(_inner: Builder) -> Self {
-        Self {}
-    }
-}
 
 #[cfg(any(feature = "native-tls", feature = "rustls-tls"))]
 mod https {
