@@ -27,8 +27,6 @@ mod https {
 
             let mut client = Client::builder(TokioExecutor::new());
             client.retry_canceled_requests(false);
-            #[cfg(feature = "http2")]
-            client.http2_only(true);
             let client = client.build(https);
             HttpsChannel { inner: client }
         }
