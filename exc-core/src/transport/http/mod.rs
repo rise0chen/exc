@@ -1,6 +1,4 @@
-/// Endpoint.
-/// A wrapper of [`hyper::client::Builder`]
-pub mod endpoint;
+/// Connector.
+pub mod connector;
 
-/// Http/Https channels.
-pub mod channel;
+pub use connector::{Client, Request, Response};
