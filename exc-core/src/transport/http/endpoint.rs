@@ -16,7 +16,11 @@ mod https {
                 if #[cfg(feature = "native-tls")] {
                     let https = hyper_tls::HttpsConnector::new();
                 } else if #[cfg(feature = "rustls-tls")] {
-                    let https = hyper_rustls::HttpsConnectorBuilder::new().with_webpki_roots().https_or_http();
+                    use hyper_rustls::ConfigBuilderExt;
+
+                    let https = hyper_rustls::HttpsConnectorBuilder::new();
+                    let https = https.with_tls_config(rustls::ClientConfig::builder_with_protocol_versions(&[&rustls::version::TLS13]).with_webpki_roots().with_no_client_auth());
+                    let https = https.https_or_http();
                     #[cfg(not(feature = "http2"))]
                     let https = https.enable_http1();
                     #[cfg(feature = "http2")]

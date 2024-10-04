@@ -403,6 +403,7 @@ dependencies = [
  "positions",
  "rust_decimal",
  "rust_decimal_macros",
+ "rustls",
  "serde",
  "thiserror",
  "time",
