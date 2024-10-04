@@ -24,7 +24,7 @@ mod https {
                     #[cfg(not(feature = "http2"))]
                     let https = https.enable_http1();
                     #[cfg(feature = "http2")]
-                    let https = https.enable_http2();
+                    let https = https.enable_all_versions();
                     let https= https.build();
                 }
             }
