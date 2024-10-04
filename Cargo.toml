@@ -61,8 +61,7 @@ tokio = "1.23.0"
 tokio-stream = "0.1.11"
 tokio-tungstenite = "0.24"
 tokio-tower = "0.6.0"
-hyper = "1.4"
-hyper-util = "0.1"
+reqwest = { version = "0.12", default-features = false }
 http = "1.1"
 http-body-util = "0.1"
 
