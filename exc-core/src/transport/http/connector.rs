@@ -3,6 +3,7 @@ use futures::{future::BoxFuture, FutureExt as _, TryFutureExt as _};
 pub use reqwest::{Request, Response};
 
 /// Http CLient
+#[derive(Clone)]
 pub struct Client {
     pub(crate) inner: reqwest::Client,
 }
