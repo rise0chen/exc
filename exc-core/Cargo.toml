@@ -62,6 +62,7 @@ workspace = true
 optional = true
 
 [dependencies.reqwest]
+features = ["gzip", "deflate"]
 workspace = true
 optional = true
 
