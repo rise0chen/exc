@@ -59,7 +59,7 @@ pin-project-lite = "0.2.9"
 async-stream = "0.3.3"
 tokio = "1.23.0"
 tokio-stream = "0.1.11"
-tokio-tungstenite = "0.24"
+tokio-tungstenite = "0.26"
 tokio-tower = "0.6.0"
 reqwest = { version = "0.12", default-features = false }
 http = "1.1"
