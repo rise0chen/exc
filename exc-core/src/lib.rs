@@ -11,10 +11,6 @@ pub mod transport;
 /// The core types for exchange APIs.
 pub use exc_types as types;
 
-#[cfg(feature = "retry")]
-/// Retry utils.
-pub use exc_service::retry;
-
 /// Utils for creating [`ExcService`](exc_service::ExcService).
 pub mod util;
 

@@ -207,23 +207,6 @@ where
         self.into_service().apply(&RateLimitLayer::new(num, per))
     }
 
-    /// Apply a retry layer to the service.
-    #[cfg(feature = "retry")]
-    fn retry(
-        self,
-        max_duration: std::time::Duration,
-    ) -> tower::retry::Retry<crate::retry::Always, IntoService<Self, R>>
-    where
-        R: Clone,
-        Self: Sized + Clone,
-    {
-        use crate::retry::Always;
-        use tower::retry::RetryLayer;
-
-        self.into_service()
-            .apply(&RetryLayer::new(Always::with_max_duration(max_duration)))
-    }
-
     /// Create a boxed [`ExcService`].
     fn boxed(self) -> BoxExcService<R>
     where

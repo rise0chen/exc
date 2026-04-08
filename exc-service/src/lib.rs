@@ -19,10 +19,6 @@ pub mod traits;
 /// The adapt layer.
 pub mod adapt;
 
-#[cfg(feature = "retry")]
-/// Retry utils.
-pub mod retry;
-
 pub use layer::ExcLayer;
 pub use {
     adapt::Adaptor,
@@ -100,22 +96,6 @@ where
     ) -> Exc<tower::limit::RateLimit<IntoService<C, Req>>, Req> {
         use tower::limit::RateLimitLayer;
         self.into_layered(&RateLimitLayer::new(num, per))
-    }
-
-    #[cfg(feature = "retry")]
-    /// Apply retry layer to the channel.
-    pub fn into_retry(
-        self,
-        max_duration: std::time::Duration,
-    ) -> Exc<tower::retry::Retry<crate::retry::Always, IntoService<C, Req>>, Req>
-    where
-        Req: Clone,
-        C: Clone,
-    {
-        use crate::retry::Always;
-        use tower::retry::RetryLayer;
-
-        self.into_layered(&RetryLayer::new(Always::with_max_duration(max_duration)))
     }
 
     /// Adapt the request type of the underlying channel to the target type `R`.
