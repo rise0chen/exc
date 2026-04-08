@@ -6,20 +6,15 @@ use rust_decimal::Decimal;
 use super::place::Place;
 
 /// Time in force.
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
 pub enum TimeInForce {
     /// Good-Til-Cancelled.
+    #[default]
     GoodTilCancelled,
     /// Fill-Or-Kill.
     FillOrKill,
     /// Immediate-Or-Cancel.
     ImmediateOrCancel,
-}
-
-impl Default for TimeInForce {
-    fn default() -> Self {
-        Self::GoodTilCancelled
-    }
 }
 
 /// Order types.

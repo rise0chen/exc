@@ -15,7 +15,7 @@ exc-service = { workspace = true }
 exc-symbol = { workspace = true }
 
 thiserror = { workspace = true }
-derive_more = { workspace = true }
+derive_more = { workspace = true, features=["display"]}
 futures = { workspace = true }
 indicator = { workspace = true }
 positions = { workspace = true, features = ["serde"] }

@@ -33,7 +33,7 @@ impl Request for SubscribeTickers {
 /// Ticker.
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, Display)]
 #[display(
-    fmt = "ts={ts}, last=({last}, {size}), bid=({bid:?}, {bid_size:?}), ask=({ask:?}, {ask_size:?})"
+    "ts={ts}, last=({last}, {size}), bid=({bid:?}, {bid_size:?}), ask=({ask:?}, {ask_size:?})"
 )]
 pub struct Ticker {
     /// Timestamp.
