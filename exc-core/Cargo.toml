@@ -12,8 +12,8 @@ readme = "./README.md"
 
 [features]
 default = ["http","rustls-tls"]
-native-tls = ["tokio-tungstenite?/native-tls", "reqwest?/native-tls-alpn"]
-rustls-tls = ["tokio-tungstenite?/rustls-tls-native-roots", "reqwest?/rustls-tls-native-roots"]
+native-tls = ["tokio-tungstenite?/native-tls", "reqwest?/native-tls"]
+rustls-tls = ["tokio-tungstenite?/rustls-tls-native-roots", "reqwest?/rustls"]
 websocket = ["tokio-tungstenite", "dep:http", "tokio/net"]
 driven = ["tokio/sync", "tokio/rt"]
 http = ["reqwest/http2", "dep:http", "http-body-util", "exc-service/http"]
